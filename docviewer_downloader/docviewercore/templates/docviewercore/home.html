@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Welcome</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% extends "./base.html" %}
+    {% block content %}
+    {%if user.username %}
+    <h3><a href="{% url 'docviewercore:logout'%}">Logout</a></h3>
+    <h1>Welcome, {{user.username}}</h1>
+    <br><br>
+    <h4>Please select one on more files to upload</h4>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="files" multiple />
+        <button type="submit">Upload</button>
+    </form>
+    {% if messages %}
+    {% for message in messages %}
+    <p style="font-weight: bold;letter-spacing: 2px;">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    <hr>
+    <h4>File Viewer</h4>
+    <p>To view file contents please enter below the filename with extension from the above list</p>
+    <form action="/viewfile/" method="post">
+        {% csrf_token %}
+        <input type="text" id="filename" name="filename" required>
+        <input type="submit" value="ViewFile">
+        <button id="download" onclick="window.location.href = '/download/'" type="button">Download File</button>
+    </form>
+
+    <script type="text/javascript">
+        $('#download').click(function () {
+            var filename = $("#filename").val()
+            $.ajax(
+                {
+                    type: "GET",
+                    url: "/download/",
+                    data: {
+                        filename: filename
+                    },
+                    success: function (data) {
+                        console.log(data)
+                    }
+                })
+        });
+    </script>
+    {% else %}
+    <h3><a href="{% url 'docviewercore:login'%}">Login</a></h3>
+    OR
+    <h3><a href="{% url 'docviewercore:signup'%}">SignUp</a></h3>
+    {% endif %}
+    {% endblock content %}
+</body>
+</html>
