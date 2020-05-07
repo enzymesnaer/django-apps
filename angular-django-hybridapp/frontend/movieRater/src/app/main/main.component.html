@@ -1,0 +1,4 @@
+<div class="layout">
+    <app-movie-list [movies]="movies" (selectMovie)="selectMovie($event)"></app-movie-list>
+    <app-movie-detail [movie]="this.selectedMovie"></app-movie-detail>
+</div> 

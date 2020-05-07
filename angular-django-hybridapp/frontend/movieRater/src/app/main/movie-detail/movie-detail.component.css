@@ -1,0 +1,16 @@
+.faOrange {
+    color:orange;
+}
+
+.faPurple{
+    color: purple;
+}
+
+#rate-container{
+    border-top: 2px purple;
+}
+
+#rate-container fa-icon{
+    cursor: pointer;
+    font-size: 2em;
+}

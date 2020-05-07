@@ -1,0 +1,20 @@
+<div *ngIf="movie">
+    
+<h1>{{ movie.title  }}</h1>
+<fa-icon [icon]="faStar" [ngClass]="{'faOrange': movie.avg_rating > 0}"></fa-icon>
+<fa-icon [icon]="faStar" [ngClass]="{'faOrange': movie.avg_rating > 1}"></fa-icon>
+<fa-icon [icon]="faStar" [ngClass]="{'faOrange': movie.avg_rating > 2}"></fa-icon>
+<fa-icon [icon]="faStar" [ngClass]="{'faOrange': movie.avg_rating > 3}"></fa-icon>
+<fa-icon [icon]="faStar" [ngClass]="{'faOrange': movie.avg_rating > 4}"></fa-icon>
+<p>{{ movie.description  }}</p>
+Avg Rating:{{movie.avg_rating}} <br> 
+No. of Ratings:{{movie.no_of_ratings}}
+</div>
+
+<div id="rate-container">
+    <h2>Rate it !!!</h2>
+    <fa-icon *ngFor="let rate of [1,2,3,4,5]" [icon]="faStar" (mouseenter)="rateHover(rate)"  [ngClass]="{'faPurple': rateHovered >= rate}"
+    (mouseleave)="rateHovered = 0"  
+    (click)="rateClicked(rate)"  
+    ></fa-icon>
+</div>
