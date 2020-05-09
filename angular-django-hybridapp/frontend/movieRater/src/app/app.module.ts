@@ -9,9 +9,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { CookieService } from 'ngx-cookie-service';
+
+
 
 const routes: Routes = [
-  {path:'', pathMatch: 'full', redirectTo: 'movies'}
+  {path:'', pathMatch: 'full', redirectTo: 'auth'}
 ];
 
 @NgModule({
@@ -24,12 +29,13 @@ const routes: Routes = [
     MainModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule
   ],
   exports: [
     RouterModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
