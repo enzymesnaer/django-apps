@@ -1,6 +1,7 @@
 import React from 'react';
 import Articles from '../components/Article';
 import axios from 'axios';
+import CustomForm from '../components/Form'; 
 
 
 const listData = [];
@@ -26,18 +27,22 @@ class ArticleList extends React.Component {
     }
 
     componentDidMount(){
-        axios.get('https://localhost:8000/api/')
+        axios.get('http://localhost:8000/api/')
             .then(res => {
                 this.setState({
                     articles: res.data 
                 });
-                console.log(res.data)
             })
     } 
     
     render(){
         return(
-            <Articles data={listData}/>
+            <div>
+            <Articles data={this.state.articles}/>
+            <br />
+            <h2>Create an article</h2>
+            <CustomForm/>
+            </div>
         );
     }
 }
